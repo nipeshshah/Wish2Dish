@@ -1,0 +1,30 @@
+@model IEnumerable<Wish2DishWeb.Models.LowStock_Result>
+
+@{
+  ViewBag.Title = "LowStock";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LowStock</h2>
+
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>
+      Product Name
+    </th>
+    <th>
+      Stock
+    </th>
+  </tr>
+  @foreach(var item in Model)
+  {
+  <tr>
+    <td>
+      @item.Name
+    </td>
+    <td>
+      @(Math.Round(item.Stock.Value,3))
+    </td>
+  </tr>
+  }
+</table>

@@ -1,0 +1,72 @@
+@model IEnumerable<Wish2DishWeb.Models.CreateSharingList_Result>
+@{
+  ViewBag.Title = "PrintList";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="toc">
+  <h1>W2D Price List</h1>
+  <b><i>Updated Date: @DateTime.Now.ToString("dd/MM/yyyy")</i></b>
+
+  @foreach(var categ in Model.GroupBy(t => t.CategoryName))
+  {
+    <div style="background-color:#dcdcdc; font-weight:bold; padding: 5px" class="toc-item">
+      <span >
+        @categ.Key
+      </span>
+    </div>
+
+    foreach(var item in categ)
+    {
+      <div class="toc-item">
+        <span class="toc-content">
+          @item.Name (Batch @item.BatchNumber)
+        </span><span class="toc-content-price">
+          @item.Amount/@item.Qty
+        </span>
+      </div>
+    }
+  }
+
+<style>
+
+  .toc {
+    width: 500px;
+    margin: 25px auto;
+    border: 0px solid grey;
+    padding: 0;
+  }
+
+  .toc-item {
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .toc-content {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    font-size: 12px;
+    font-family: consolas;
+  }
+
+  .toc-content-price {
+    float: right;
+    position: relative;
+    font-size: 12px;
+    font-family: consolas;
+  }
+
+    .toc-content-price:before {
+      content: "";
+      width: 999px;
+      height: 100%;
+      position: absolute;
+      top: -1px;
+      right: 100%;
+      z-index: 0;
+      border-bottom: 1px dotted black;
+    }
+</style>

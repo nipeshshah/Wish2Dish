@@ -1,0 +1,66 @@
+@model IEnumerable<Wish2DishWeb.Models.Sale>
+
+@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inv_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalBillAmount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inv_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalBillAmount)
+        </td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+          @Html.ActionLink("Items", "Items", new { id = item.Id }) |
+          @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+          @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+        </td>
+    </tr>
+}
+
+</table>

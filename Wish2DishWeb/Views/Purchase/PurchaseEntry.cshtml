@@ -1,0 +1,142 @@
+@model Wish2DishWeb.Models.PurchaseOrder
+
+@{
+  ViewBag.Title = "PurchaseEntry";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PurchaseEntry</h2>
+
+@using(Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+
+  <div class="form-horizontal">
+    <h4>ProductBatch</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <a href="#" id="add">Add</a>
+    <br />
+    <div class="form-group">
+      @Html.LabelFor(model => model.BatchId, "BatchId", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.DropDownList("BatchId", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.BatchId, "", new { @class = "text-danger" })
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            @Html.LabelFor(model => model.productBatches[0].ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>
+          <th>
+            @Html.LabelFor(model => model.productBatches[0].PP, htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>
+          @*<th>
+            @Html.LabelFor(model => model.productBatches[0].Exp, htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>*@
+          <th>
+            @Html.LabelFor(model => model.productBatches[0].MRP, htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>
+          @*<th>
+            @Html.LabelFor(model => model.productBatches[0].Prof, htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>*@
+          <th>
+            @Html.LabelFor(model => model.productBatches[0].Stock, htmlAttributes: new { @class = "control-label col-md-2" })
+          </th>
+        </tr>
+      </thead>
+      <tbody id="list-items">
+        <tr class="item-template" style="display:none">
+          <td>
+            @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].ProductId, "", new { @class = "text-danger" })
+          </td>
+          <td>
+            @Html.EditorFor(model => model.productBatches[-1].PP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].PP, "", new { @class = "text-danger" })
+          </td>
+          @*<td>
+            @Html.EditorFor(model => model.productBatches[-1].Exp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].Exp, "", new { @class = "text-danger" })
+          </td>*@
+          <td>
+            @Html.EditorFor(model => model.productBatches[-1].MRP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].MRP, "", new { @class = "text-danger" })
+          </td>
+          @*<td>
+            @Html.EditorFor(model => model.productBatches[-1].Prof, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].Prof, "", new { @class = "text-danger" })
+          </td>*@
+          <td>
+            @Html.EditorFor(model => model.productBatches[-1].Stock, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productBatches[-1].Stock, "", new { @class = "text-danger" })
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Create" onclick="Submit()" class="btn btn-default" />
+      </div>
+    </div>
+  </div>
+}
+@section Scripts {
+  <script>
+    $(function () {
+      $("#add").click(function (e) {
+        e.preventDefault();
+        debugger;
+        var i = $(".item-prodbatch").length;
+        //var n = '<br/>' + '<input type="text" class="items" name="users[' + i + '].FirstName" />' +
+        //  '<input type="text" class="items" name="users[' + i + '].LastName" />';
+        var item = $('.item-template').clone();
+        var s = item[0].outerHTML;
+        var pb = 'productBatches[' + i + ']';
+        var pb2 = 'productBatches_' + i + '';
+        s = s.replaceAll('productBatches[-1]', pb);
+        s = s.replaceAll('productBatches_-1', pb2);
+        s = s.replaceAll('item-template', 'item-prodbatch');
+        $("#list-items").append($(s));
+        $('.item-prodbatch').show();
+        //item = item.replaceAll("productBatches[0]", "productBatches[" + i + "]");
+        //item.removeClass("item-template", "item-prodbatch");
+        //item.show();
+
+      });
+    });
+
+    function Submit() {
+      var data = {};
+      data["BatchId"] = $('#BatchId :Selected').val();
+      data["productBatches"] = [];
+      $(".item-prodbatch").each(function (index, item) {
+        var datavar = {};
+        datavar["ProductId"] = $(this).find('[name="ProductId"] :Selected').val();
+        datavar["PP"] = $(this).find('[name="productBatches['+index+'].PP"]').val();
+        datavar["MRP"] = $(this).find('[name="productBatches[' + index +'].MRP"]').val();
+        datavar["Stock"] = $(this).find('[name="productBatches[' + index +'].Stock"]').val();
+        data["productBatches"].push(datavar);
+      });
+      $.ajax({
+        type: "POST",
+        url: 'PurchaseEntry',
+        data: data,
+        success: function (result) {
+          onAjaxRequestSuccess(result);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert("fail");
+        }
+      });  
+    }
+
+  </script>
+}
+<div>
+  @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,47 @@
+@model IEnumerable<Wish2DishWeb.Models.GetUpLine_Result>
+
+@{
+    ViewBag.Title = "Upline";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upline</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Member Id
+        </th>
+        <th>
+            Member Name
+        </th>
+        <th>
+            Level
+        </th>
+        <th>
+            Referral Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferralName)
+        </td>
+    </tr>
+}
+
+</table>

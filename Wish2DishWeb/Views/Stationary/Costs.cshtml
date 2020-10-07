@@ -1,0 +1,25 @@
+@model IEnumerable<Wish2DishWeb.Models.StockCosts_Result>
+@{
+    ViewBag.Title = "Costs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Costs</h2>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Batch (Date)</th>
+    <th>PP</th>
+  </tr>
+
+  @foreach(var item in Model)
+  {
+    <tr>
+      <td>@item.Name</td>
+      <td>@item.BatchNumber ( @item.BatchDate)</td>
+      <td style="text-align:right">@item.PP</td>
+    </tr>
+
+  }
+</table>

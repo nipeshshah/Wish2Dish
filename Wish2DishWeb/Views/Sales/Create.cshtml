@@ -1,0 +1,155 @@
+
+@{
+  ViewBag.Title = "Create";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using(Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+
+
+  <div class="form-horizontal">
+    <h2>Sales</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+      @Html.Label("Customer", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.DropDownList("Customer", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+    <div class="form-group">
+      @Html.Label("Invoice Date", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBox("IDate", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+
+    <div class="form-group">
+      @Html.Label("Invoice Number", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBox("InvNumber", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+    <div class="form-group">
+      @Html.Label("DueAmount", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBox("DueAmount", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+    <div class="form-group">
+      @Html.Label("PaidAmount", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBox("PaidAmount", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+    <div class="form-group">
+      @Html.Label("TotalAmount", htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBox("TotalAmount", null, htmlAttributes: new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.ReferredBy, "", new { @class = "text-danger" })*@
+      </div>
+    </div>
+
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2"><a href="#" id="add">Add</a></th>
+      </tr>
+      <tr>
+        <th>
+          Product Batch
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th>
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody id="list-items">
+      <tr class="item-template" style="display:none">
+        <td>
+          @Html.DropDownList("ProductBatch", null, htmlAttributes: new { @class = "form-control" })
+        </td>
+        <td>
+          @Html.TextBox("Quantity", null, htmlAttributes: new { @class = "form-control" })
+        </td>
+      </tr>
+  </table>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <input type="button" onclick="Submit()" value="Create" class="btn btn-default" />
+    </div>
+  </div>
+
+}
+
+@section Scripts {
+  <script>
+    $(function () {
+      $("#add").click(function (e) {
+        e.preventDefault();
+        debugger;
+        var i = $(".item-prodbatch").length;
+        //var n = '<br/>' + '<input type="text" class="items" name="users[' + i + '].FirstName" />' +
+        //  '<input type="text" class="items" name="users[' + i + '].LastName" />';
+        var item = $('.item-template').clone();
+        var s = item[0].outerHTML;
+        var pb = 'productBatches[' + i + ']';
+        var pb2 = 'productBatches_' + i + '';
+        s = s.replaceAll('productBatches[-1]', pb);
+        s = s.replaceAll('productBatches_-1', pb2);
+        s = s.replaceAll('item-template', 'item-prodbatch');
+        $("#list-items").append($(s));
+        $('.item-prodbatch').show();
+        //item = item.replaceAll("productBatches[0]", "productBatches[" + i + "]");
+        //item.removeClass("item-template", "item-prodbatch");
+        //item.show();
+
+      });
+    });
+
+    function Submit() {
+      var form = $('#__AjaxAntiForgeryForm');
+      var token = $('input[name="__RequestVerificationToken"]').val();
+
+      var data = {};
+      data["__RequestVerificationToken"] = token;
+      
+      data["CustomerId"] = $('#Customer :Selected').val();
+      data["SDate"] = $('[name="IDate"]').val();
+      data["Inv_No"] = $('[name="InvNumber"]').val();
+      data["SalesInventories"] = [];
+      $(".item-prodbatch").each(function (index, item) {
+        var datavar = {};
+        datavar["ProductBatchId"] = $(this).find('[name="ProductBatch"] :Selected').val();
+        datavar["Quantity"] = $(this).find('[name="Quantity"]').val();
+        data["SalesInventories"].push(datavar);
+      });
+      console.log(data);
+      $.ajax({
+        type: "POST",
+        url: 'Create',
+        data: data,
+        success: function (result) {
+          onAjaxRequestSuccess(result);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert("fail");
+        }
+      });
+    }
+
+  </script>
+}

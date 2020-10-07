@@ -1,0 +1,1299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WishDishDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ReferralId" Type="nvarchar" MaxLength="20" />
+          <Property Name="ReferralCode" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="BatchDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Commissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="FromCustomer" Type="bigint" />
+          <Property Name="ToCustomer" Type="bigint" />
+          <Property Name="ProductBatchId" Type="int" />
+          <Property Name="Level" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesBillId" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferredBy" Type="bigint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ProductBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="PP" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Exp" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Prof" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Stock" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Gujarati" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hindi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weight" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="StandardWeight" Type="decimal" Precision="10" Scale="3" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" />
+          <Property Name="SDate" Type="date" />
+          <Property Name="Inv No" Type="nvarchar" MaxLength="20" />
+          <Property Name="DueAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalBillAmount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SalesInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesId" Type="int" />
+          <Property Name="ProductBatchId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Commissions_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Commissions" Type="Self.Commissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commissions">
+              <PropertyRef Name="FromCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_Customer1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Commissions" Type="Self.Commissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commissions">
+              <PropertyRef Name="ToCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_ProductBatch">
+          <End Role="ProductBatch" Type="Self.ProductBatch" Multiplicity="0..1" />
+          <End Role="Commissions" Type="Self.Commissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBatch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commissions">
+              <PropertyRef Name="ProductBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="Commissions" Type="Self.Commissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commissions">
+              <PropertyRef Name="SalesBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_ToCustomer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Customer1" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer1">
+              <PropertyRef Name="ReferredBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBatch_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="0..1" />
+          <End Role="ProductBatch" Type="Self.ProductBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductBatch">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBatch_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductBatch" Type="Self.ProductBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductBatch">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesInventory_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="SalesInventory" Type="Self.SalesInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesInventory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesInventory_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="SalesInventory" Type="Self.SalesInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesInventory">
+              <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="BatchDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="AddNewSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="SDate" Type="date" Mode="In" />
+          <Parameter Name="InvNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="DueAmount" Type="decimal" Mode="In" />
+          <Parameter Name="PaidAmount" Type="decimal" Mode="In" />
+          <Parameter Name="TotalBillAmount" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="AddNewSalesItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SalesId" Type="int" Mode="In" />
+          <Parameter Name="ProductBatchId" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="AddProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="GujaratiName" Type="nvarchar" Mode="In" />
+          <Parameter Name="HindiName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Image" Type="nvarchar" Mode="In" />
+          <Parameter Name="Weight" Type="decimal" Mode="In" />
+          <Parameter Name="StdWeight" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="AddPurchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productId" Type="int" Mode="In" />
+          <Parameter Name="cost" Type="decimal" Mode="In" />
+          <Parameter Name="MRP" Type="decimal" Mode="In" />
+          <Parameter Name="batchId" Type="int" Mode="In" />
+          <Parameter Name="stock" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="AddSaleItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductBatchId" Type="int" Mode="In" />
+          <Parameter Name="CustId" Type="int" Mode="In" />
+          <Parameter Name="Weight" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="CreateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="ReferredBy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CreateSharingList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GenerateLabel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductBatchId" Type="int" Mode="In" />
+          <Parameter Name="Weight" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="GetDownLine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="customerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetErCommReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetProductBatches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetUpLine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="customerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LowStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StockCosts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StockInHand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IsBatchWise" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="WishDishDBModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commissions" EntityType="Self.Commissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBatch" EntityType="Self.ProductBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesInventory" EntityType="Self.SalesInventory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Commissions_Customer" Association="Self.FK_Commissions_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Commissions" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_Customer1" Association="Self.FK_Commissions_Customer1">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Commissions" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_ProductBatch" Association="Self.FK_Commissions_ProductBatch">
+            <End Role="ProductBatch" EntitySet="ProductBatch" />
+            <End Role="Commissions" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_Sales" Association="Self.FK_Commissions_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Commissions" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_ToCustomer" Association="Self.FK_Customer_ToCustomer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer1" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBatch_Batch" Association="Self.FK_ProductBatch_Batch">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="ProductBatch" EntitySet="ProductBatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBatch_Products" Association="Self.FK_ProductBatch_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductBatch" EntitySet="ProductBatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customer" Association="Self.FK_Sales_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesInventory_Products" Association="Self.FK_SalesInventory_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SalesInventory" EntitySet="SalesInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesInventory_Sales" Association="Self.FK_SalesInventory_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="SalesInventory" EntitySet="SalesInventory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WishDishDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WishDishDBEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="AddBatch">
+            <Parameter Name="BatchNumber" Mode="In" Type="String" />
+            <Parameter Name="BatchDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSales">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="SDate" Mode="In" Type="DateTime" />
+            <Parameter Name="InvNo" Mode="In" Type="String" />
+            <Parameter Name="DueAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="PaidAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalBillAmount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewSalesItem">
+            <Parameter Name="SalesId" Mode="In" Type="Int32" />
+            <Parameter Name="ProductBatchId" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="AddProduct">
+            <Parameter Name="CategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="GujaratiName" Mode="In" Type="String" />
+            <Parameter Name="HindiName" Mode="In" Type="String" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="Weight" Mode="In" Type="Decimal" />
+            <Parameter Name="StdWeight" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="AddPurchase">
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+            <Parameter Name="cost" Mode="In" Type="Decimal" />
+            <Parameter Name="MRP" Mode="In" Type="Decimal" />
+            <Parameter Name="batchId" Mode="In" Type="Int32" />
+            <Parameter Name="stock" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="AddSaleItem" ReturnType="Collection(WishDishDBModel.AddSaleItem_Result)">
+            <Parameter Name="ProductBatchId" Mode="In" Type="Int32" />
+            <Parameter Name="CustId" Mode="In" Type="Int32" />
+            <Parameter Name="Weight" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="CreateCustomer">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="ReferredBy" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateLabel" ReturnType="Collection(WishDishDBModel.GenerateLabel_Result)">
+            <Parameter Name="ProductBatchId" Mode="In" Type="Int32" />
+            <Parameter Name="Weight" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GetErCommReport" ReturnType="Collection(WishDishDBModel.GetErCommReport_Result)" />
+          <FunctionImport Name="StockInHand" ReturnType="Collection(WishDishDBModel.StockInHand_Result)">
+          <Parameter Name="IsBatchWise" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="StockCosts" ReturnType="Collection(WishDishDBModel.StockCosts_Result)" />
+          <FunctionImport Name="CreateSharingList" ReturnType="Collection(WishDishDBModel.CreateSharingList_Result)" />
+          <FunctionImport Name="LowStock" ReturnType="Collection(WishDishDBModel.LowStock_Result)" />
+          <EntitySet Name="Batches" EntityType="WishDishDBModel.Batch" />
+          <EntitySet Name="Categories" EntityType="WishDishDBModel.Category" />
+          <EntitySet Name="Commissions" EntityType="WishDishDBModel.Commission" />
+          <EntitySet Name="ProductBatches" EntityType="WishDishDBModel.ProductBatch" />
+          <EntitySet Name="Products" EntityType="WishDishDBModel.Product" />
+          <EntitySet Name="Sales" EntityType="WishDishDBModel.Sale" />
+          <EntitySet Name="SalesInventories" EntityType="WishDishDBModel.SalesInventory" />
+          <AssociationSet Name="FK_ProductBatch_Batch" Association="WishDishDBModel.FK_ProductBatch_Batch">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="ProductBatch" EntitySet="ProductBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Category" Association="WishDishDBModel.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_ProductBatch" Association="WishDishDBModel.FK_Commissions_ProductBatch">
+            <End Role="ProductBatch" EntitySet="ProductBatches" />
+            <End Role="Commission" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_Sales" Association="WishDishDBModel.FK_Commissions_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="Commission" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBatch_Products" Association="WishDishDBModel.FK_ProductBatch_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductBatch" EntitySet="ProductBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesInventory_Products" Association="WishDishDBModel.FK_SalesInventory_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SalesInventory" EntitySet="SalesInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesInventory_Sales" Association="WishDishDBModel.FK_SalesInventory_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SalesInventory" EntitySet="SalesInventories" />
+          </AssociationSet>
+          <FunctionImport Name="GetProductBatches" ReturnType="Collection(WishDishDBModel.GetProductBatches_Result)" />
+          <FunctionImport Name="GetDownLine" ReturnType="Collection(WishDishDBModel.GetDownLine_Result)">
+          <Parameter Name="customerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUpLine" ReturnType="Collection(WishDishDBModel.GetUpLine_Result)">
+          <Parameter Name="customerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AspNetRoles" EntityType="WishDishDBModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="WishDishDBModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="WishDishDBModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="WishDishDBModel.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="WishDishDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="WishDishDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="WishDishDBModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="WishDishDBModel.Customer" />
+          <AssociationSet Name="FK_Commissions_Customer" Association="WishDishDBModel.FK_Commissions_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Commission" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commissions_Customer1" Association="WishDishDBModel.FK_Commissions_Customer1">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Commission" EntitySet="Commissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_ToCustomer" Association="WishDishDBModel.FK_Customer_ToCustomer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer1" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customer" Association="WishDishDBModel.FK_Sales_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="AddSaleItem_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BatchNumber" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BatchDate" Nullable="true" />
+          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GenerateLabel_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BatchNumber" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BatchDate" Nullable="true" />
+          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetErCommReport_Result">
+          <Property Type="Int32" Name="ToCustomer" Nullable="true" />
+          <Property Type="Int32" Name="Level" Nullable="true" />
+          <Property Type="Decimal" Name="Column1" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="StockInHand_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BatchDate" Nullable="true" />
+          <Property Type="String" Name="BatchNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Stock" Nullable="true" Precision="38" Scale="20" />
+          <Property Type="Decimal" Name="StockValue" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="StockCosts_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BatchDate" Nullable="true" />
+          <Property Type="String" Name="BatchNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="PP" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int64" Name="rn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CreateSharingList_Result">
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BatchNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Qty" Nullable="true" MaxLength="29" />
+          <Property Type="String" Name="Amount" Nullable="false" MaxLength="46" />
+        </ComplexType>
+        <ComplexType Name="LowStock_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Stock" Nullable="true" Precision="38" Scale="20" />
+          <Property Type="Decimal" Name="StockValue" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BatchDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ProductBatches" Relationship="WishDishDBModel.FK_ProductBatch_Batch" FromRole="Batch" ToRole="ProductBatch" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="WishDishDBModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Commission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromCustomer" Type="Int64" />
+          <Property Name="ToCustomer" Type="Int64" />
+          <Property Name="ProductBatchId" Type="Int32" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesBillId" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProductBatch" Relationship="WishDishDBModel.FK_Commissions_ProductBatch" FromRole="Commission" ToRole="ProductBatch" />
+          <NavigationProperty Name="Sale" Relationship="WishDishDBModel.FK_Commissions_Sales" FromRole="Commission" ToRole="Sale" />
+          <NavigationProperty Name="Customer" Relationship="WishDishDBModel.FK_Commissions_Customer" FromRole="Commission" ToRole="Customer" />
+          <NavigationProperty Name="Customer1" Relationship="WishDishDBModel.FK_Commissions_Customer1" FromRole="Commission" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="ProductBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="PP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Exp" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Prof" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stock" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="Batch" Relationship="WishDishDBModel.FK_ProductBatch_Batch" FromRole="ProductBatch" ToRole="Batch" />
+          <NavigationProperty Name="Commissions" Relationship="WishDishDBModel.FK_Commissions_ProductBatch" FromRole="ProductBatch" ToRole="Commission" />
+          <NavigationProperty Name="Product" Relationship="WishDishDBModel.FK_ProductBatch_Products" FromRole="ProductBatch" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Gujarati" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hindi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="StandardWeight" Type="Decimal" Precision="10" Scale="3" />
+          <NavigationProperty Name="Category" Relationship="WishDishDBModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductBatches" Relationship="WishDishDBModel.FK_ProductBatch_Products" FromRole="Product" ToRole="ProductBatch" />
+          <NavigationProperty Name="SalesInventories" Relationship="WishDishDBModel.FK_SalesInventory_Products" FromRole="Product" ToRole="SalesInventory" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int64" />
+          <Property Name="SDate" Type="DateTime" Precision="0" />
+          <Property Name="Inv_No" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DueAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalBillAmount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Commissions" Relationship="WishDishDBModel.FK_Commissions_Sales" FromRole="Sale" ToRole="Commission" />
+          <NavigationProperty Name="SalesInventories" Relationship="WishDishDBModel.FK_SalesInventory_Sales" FromRole="Sale" ToRole="SalesInventory" />
+          <NavigationProperty Name="Customer" Relationship="WishDishDBModel.FK_Sales_Customer" FromRole="Sale" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="SalesInventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesId" Type="Int32" />
+          <Property Name="ProductBatchId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="WishDishDBModel.FK_SalesInventory_Products" FromRole="SalesInventory" ToRole="Product" />
+          <NavigationProperty Name="Sale" Relationship="WishDishDBModel.FK_SalesInventory_Sales" FromRole="SalesInventory" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_ProductBatch_Batch">
+          <End Type="WishDishDBModel.Batch" Role="Batch" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.ProductBatch" Role="ProductBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductBatch">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Category">
+          <End Type="WishDishDBModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_ProductBatch">
+          <End Type="WishDishDBModel.ProductBatch" Role="ProductBatch" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Commission" Role="Commission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBatch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commission">
+              <PropertyRef Name="ProductBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_Sales">
+          <End Type="WishDishDBModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Commission" Role="Commission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commission">
+              <PropertyRef Name="SalesBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBatch_Products">
+          <End Type="WishDishDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.ProductBatch" Role="ProductBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductBatch">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesInventory_Products">
+          <End Type="WishDishDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.SalesInventory" Role="SalesInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesInventory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesInventory_Sales">
+          <End Type="WishDishDBModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.SalesInventory" Role="SalesInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesInventory">
+              <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetProductBatches_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="199" />
+          <Property Type="Decimal" Name="MRP" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Weight" Nullable="true" Precision="10" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="GetDownLine_Result">
+          <Property Type="Int32" Name="MemberId" Nullable="true" />
+          <Property Type="String" Name="MemberName" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Level" Nullable="true" />
+          <Property Type="String" Name="ReferralName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUpLine_Result">
+          <Property Type="Int32" Name="MemberId" Nullable="true" />
+          <Property Type="String" Name="MemberName" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Level" Nullable="true" />
+          <Property Type="String" Name="ReferralName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="WishDishDBModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WishDishDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="WishDishDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="WishDishDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="WishDishDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="WishDishDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="ReferralId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="WishDishDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WishDishDBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="WishDishDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WishDishDBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="WishDishDBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="WishDishDBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferredBy" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Commissions" Relationship="WishDishDBModel.FK_Commissions_Customer" FromRole="Customer" ToRole="Commission" />
+          <NavigationProperty Name="Commissions1" Relationship="WishDishDBModel.FK_Commissions_Customer1" FromRole="Customer" ToRole="Commission" />
+          <NavigationProperty Name="Customer1" Relationship="WishDishDBModel.FK_Customer_ToCustomer" FromRole="Customer" ToRole="Customer1" />
+          <NavigationProperty Name="Customer2" Relationship="WishDishDBModel.FK_Customer_ToCustomer" FromRole="Customer1" ToRole="Customer" />
+          <NavigationProperty Name="Sales" Relationship="WishDishDBModel.FK_Sales_Customer" FromRole="Customer" ToRole="Sale" />
+          <Property Name="ContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Commissions_Customer">
+          <End Type="WishDishDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Commission" Role="Commission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commission">
+              <PropertyRef Name="FromCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commissions_Customer1">
+          <End Type="WishDishDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Commission" Role="Commission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commission">
+              <PropertyRef Name="ToCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_ToCustomer">
+          <End Type="WishDishDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Customer" Role="Customer1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer1">
+              <PropertyRef Name="ReferredBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customer">
+          <End Type="WishDishDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="WishDishDBModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WishDishDBModelStoreContainer" CdmEntityContainer="WishDishDBEntities">
+          <FunctionImportMapping FunctionImportName="AddBatch" FunctionName="WishDishDBModel.Store.AddBatch" />
+          <FunctionImportMapping FunctionImportName="AddNewSales" FunctionName="WishDishDBModel.Store.AddNewSales" />
+          <FunctionImportMapping FunctionImportName="AddNewSalesItem" FunctionName="WishDishDBModel.Store.AddNewSalesItem" />
+          <FunctionImportMapping FunctionImportName="AddProduct" FunctionName="WishDishDBModel.Store.AddProduct" />
+          <FunctionImportMapping FunctionImportName="AddPurchase" FunctionName="WishDishDBModel.Store.AddPurchase" />
+          <FunctionImportMapping FunctionImportName="AddSaleItem" FunctionName="WishDishDBModel.Store.AddSaleItem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.AddSaleItem_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateCustomer" FunctionName="WishDishDBModel.Store.CreateCustomer" />
+          <FunctionImportMapping FunctionImportName="GenerateLabel" FunctionName="WishDishDBModel.Store.GenerateLabel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.GenerateLabel_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetErCommReport" FunctionName="WishDishDBModel.Store.GetErCommReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.GetErCommReport_Result">
+                <ScalarProperty Name="ToCustomer" ColumnName="ToCustomer" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StockInHand" FunctionName="WishDishDBModel.Store.StockInHand">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.StockInHand_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="StockValue" ColumnName="StockValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StockCosts" FunctionName="WishDishDBModel.Store.StockCosts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.StockCosts_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="PP" ColumnName="PP" />
+                <ScalarProperty Name="rn" ColumnName="rn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CreateSharingList" FunctionName="WishDishDBModel.Store.CreateSharingList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.CreateSharingList_Result">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LowStock" FunctionName="WishDishDBModel.Store.LowStock">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.LowStock_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="StockValue" ColumnName="StockValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="WishDishDBModel.Batch">
+              <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="WishDishDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commissions">
+            <EntityTypeMapping TypeName="WishDishDBModel.Commission">
+              <MappingFragment StoreEntitySet="Commissions">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SalesBillId" ColumnName="SalesBillId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="ProductBatchId" ColumnName="ProductBatchId" />
+                <ScalarProperty Name="ToCustomer" ColumnName="ToCustomer" />
+                <ScalarProperty Name="FromCustomer" ColumnName="FromCustomer" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBatches">
+            <EntityTypeMapping TypeName="WishDishDBModel.ProductBatch">
+              <MappingFragment StoreEntitySet="ProductBatch">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Prof" ColumnName="Prof" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="PP" ColumnName="PP" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="WishDishDBModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="StandardWeight" ColumnName="StandardWeight" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Hindi" ColumnName="Hindi" />
+                <ScalarProperty Name="Gujarati" ColumnName="Gujarati" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="WishDishDBModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="TotalBillAmount" ColumnName="TotalBillAmount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+                <ScalarProperty Name="Inv_No" ColumnName="Inv No" />
+                <ScalarProperty Name="SDate" ColumnName="SDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesInventories">
+            <EntityTypeMapping TypeName="WishDishDBModel.SalesInventory">
+              <MappingFragment StoreEntitySet="SalesInventory">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductBatchId" ColumnName="ProductBatchId" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetProductBatches" FunctionName="WishDishDBModel.Store.GetProductBatches">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.GetProductBatches_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDownLine" FunctionName="WishDishDBModel.Store.GetDownLine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.GetDownLine_Result">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="ReferralName" ColumnName="ReferralName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUpLine" FunctionName="WishDishDBModel.Store.GetUpLine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WishDishDBModel.GetUpLine_Result">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="ReferralName" ColumnName="ReferralName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="WishDishDBModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="WishDishDBModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="WishDishDBModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="WishDishDBModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="ReferralId" ColumnName="ReferralId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="WishDishDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="WishDishDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReferredBy" ColumnName="ReferredBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

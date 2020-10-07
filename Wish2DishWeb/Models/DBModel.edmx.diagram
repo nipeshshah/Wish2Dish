@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2024b72beb164c359f25707036ffb1a3" Name="Diagram1">
+        <EntityTypeShape EntityType="WishDishDBModel.Batch" Width="1.5" PointX="3.75" PointY="8" />
+        <EntityTypeShape EntityType="WishDishDBModel.Category" Width="1.5" PointX="1.5" PointY="11.375" />
+        <EntityTypeShape EntityType="WishDishDBModel.Commission" Width="1.5" PointX="8.25" PointY="3" />
+        <EntityTypeShape EntityType="WishDishDBModel.ProductBatch" Width="1.5" PointX="6" PointY="9.375" />
+        <EntityTypeShape EntityType="WishDishDBModel.Product" Width="1.5" PointX="3.75" PointY="10.625" />
+        <EntityTypeShape EntityType="WishDishDBModel.Sale" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="WishDishDBModel.SalesInventory" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="WishDishDBModel.FK_ProductBatch_Batch" />
+        <AssociationConnector Association="WishDishDBModel.FK_Products_Category" />
+        <AssociationConnector Association="WishDishDBModel.FK_Commissions_ProductBatch" />
+        <AssociationConnector Association="WishDishDBModel.FK_Commissions_Sales" />
+        <AssociationConnector Association="WishDishDBModel.FK_ProductBatch_Products" />
+        <AssociationConnector Association="WishDishDBModel.FK_SalesInventory_Products" />
+        <AssociationConnector Association="WishDishDBModel.FK_SalesInventory_Sales" />
+        <EntityTypeShape EntityType="WishDishDBModel.AspNetRole" Width="1.5" PointX="8.375" PointY="9.5" />
+        <EntityTypeShape EntityType="WishDishDBModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="8" />
+        <EntityTypeShape EntityType="WishDishDBModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="10.75" />
+        <EntityTypeShape EntityType="WishDishDBModel.AspNetUser" Width="1.5" PointX="10.625" PointY="8.375" />
+        <AssociationConnector Association="WishDishDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="WishDishDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="WishDishDBModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="WishDishDBModel.Customer" Width="1.5" PointX="0.75" PointY="3.25" />
+        <AssociationConnector Association="WishDishDBModel.FK_Commissions_Customer" />
+        <AssociationConnector Association="WishDishDBModel.FK_Commissions_Customer1" />
+        <AssociationConnector Association="WishDishDBModel.FK_Customer_ToCustomer" />
+        <AssociationConnector Association="WishDishDBModel.FK_Sales_Customer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,98 @@
+@model Wish2DishWeb.Models.Sale
+
+@{
+  ViewBag.Title = "Items";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Items</h2>
+
+<div>
+  <h4>Sale</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor(model => model.CustomerId)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.CustomerId)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.SDate)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.SDate)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Inv_No)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Inv_No)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.DueAmount)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.DueAmount)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.PaidAmount)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.PaidAmount)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.TotalBillAmount)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.TotalBillAmount)
+    </dd>
+
+  </dl>
+  <div>
+    <form action="@Url.Action("AddSaleItem", "Sales")" method="post">
+      @Html.AntiForgeryToken()
+      @Html.HiddenFor(model => model.Id)
+      <table>
+        <tr>
+          <th>
+            Product Batch
+          </th>
+          <th>
+            Quantity
+          </th>
+          <th>
+            &nbsp;
+          </th>
+        </tr>
+        <tr>
+          <td>
+            @Html.DropDownList("ProductBatch", null, htmlAttributes: new { @class = "form-control" })
+          </td>
+          <td>
+            @Html.TextBox("Quantity", null, htmlAttributes: new { @class = "form-control" })
+          </td>
+          <td>
+            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="button" title="Update" value="Update" onclick="location.href='@Url.Action("AddSaleItem", "Sales")'" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<p>
+  @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+  @Html.ActionLink("Back to List", "Index")
+</p>

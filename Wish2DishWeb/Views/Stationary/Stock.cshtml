@@ -1,0 +1,38 @@
+@model IEnumerable<Wish2DishWeb.Models.StockInHand_Result>
+@{
+  ViewBag.Title = "Stock";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Stock List</h2>
+
+<table class="table table-striped">
+  <tr>
+    <th>Batch Number</th>
+    <th>Batch Date</th>
+    <th>Name</th>
+    <th>Stock</th>
+    <th>Price</th>
+  </tr>
+  @foreach(var item in Model)
+  {
+  <tr>
+    <td>@item.BatchNumber</td>
+    <td>@item.BatchDate</td>
+    <td>@item.Name</td>
+    <td style="text-align:right" >@Math.Round(item.Stock.Value, 3).ToString() Kg</td>
+    <td style="text-align:right" >@Math.Round(item.StockValue.Value, 2).ToString() Rs.</td>
+  </tr>
+    
+  }
+  <tr>
+    <td style="text-align:right"  colspan="4">
+      Total:
+    </td>
+    <td style="text-align:right" >
+      @Math.Round(ViewBag.TotalStockValue, 2).ToString() Rs.
+    </td>
+  </tr>
+</table>
+
